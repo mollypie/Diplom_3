@@ -9,9 +9,14 @@ class LoginPage(BasePage):
     def click_to_forgot_password_link(self):
         self.click_to_element(LoginPageLocators.LINK_FORGOT_PASSWORD)
 
+    @allure.step('Ввод почты в поле')
+    def enter_email(self, email):
+        self.add_text_to_element(LoginPageLocators.INPUT_EMAIL, email)
 
+    @allure.step('Ввод пароля в поле')
+    def enter_password(self, password):
+        self.add_text_to_element(LoginPageLocators.INPUT_PASSWORD, password)
 
-
-
-
-
+    @allure.step('Клик на кнопку Войти')
+    def click_to_button_enter(self):
+        self.click_to_element(LoginPageLocators.BUTTON_ENTER)

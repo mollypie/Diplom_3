@@ -17,9 +17,3 @@ class TestLoginPage:
         forgot_password_page = ForgotPasswordPage(driver)
 
         assert forgot_password_page.get_title_on_login_page() == TITLE_RECOVERY_PASSWORD
-
-
-
-
-
-
