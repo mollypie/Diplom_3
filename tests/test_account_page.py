@@ -4,11 +4,11 @@ from conftest import user
 from pages.account_page import AccountPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
-from pages_url import LOGIN_PAGE
+from pages_url import *
 
 
-class TestMainPage:
-    @allure.title('Переход по клику на «Личный кабинет»')
+class TestAccountPage:
+    @allure.title('Переход в раздел «История заказов»')
     def test_open_account_page(self, user):
         extended_driver = user['driver']
         extended_driver.get(LOGIN_PAGE)
@@ -22,6 +22,7 @@ class TestMainPage:
         main_page.click_to_account_button()
 
         account_page = AccountPage(extended_driver)
-        profile = account_page.get_profile_element()
+        account_page.click_to_order_history_element()
+        profile = account_page.get_order_history_element()
 
-        assert account_page.get_text_profile_element() == 'Профиль' and profile.get_attribute('aria-current') == 'page'
+        assert account_page.get_text_order_history_element() == 'История заказов' and profile.get_attribute('aria-current') == 'page'
