@@ -12,8 +12,8 @@ class ForgotPasswordPage(BasePage):
 
     @allure.step('Ввод почты в поле')
     def enter_email(self, email):
-        return self.add_text_to_element(ForgotPasswordPageLocators.INPUT_EMAIL, email)
+        self.add_text_to_element(ForgotPasswordPageLocators.INPUT_EMAIL, email)
 
     @allure.step('Клик по кнопке «Восстановить»')
     def click_recover_button(self):
-        return self.click_to_element(ForgotPasswordPageLocators.RECOVER_BUTTON)
+        self.click_to_element(ForgotPasswordPageLocators.RECOVER_BUTTON)
