@@ -12,3 +12,7 @@ class MainPage(BasePage):
     @allure.step('Клик по кнопке «Личный кабинет»')
     def click_to_account_button(self):
         self.click_to_element(MainPageLocators.BUTTON_ACCOUNT)
+
+    @allure.step('Клик по кнопке «Лента Заказов»')
+    def click_to_order_feed_button(self):
+        self.click_to_element(MainPageLocators.BUTTON_ORDER_FEED)
