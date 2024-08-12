@@ -24,3 +24,7 @@ class AccountPage(BasePage):
     @allure.step('Клик на элемент История заказов')
     def click_to_order_history_element(self):
         return self.click_to_element(AccountPageLocators.ORDER_HISTORY_ELEMENT)
+
+    @allure.step('Клик на элемент Выход')
+    def click_to_exit_element(self):
+        return self.click_to_element(AccountPageLocators.EXIT_ELEMENT)
