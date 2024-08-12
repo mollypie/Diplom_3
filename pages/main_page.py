@@ -24,3 +24,11 @@ class MainPage(BasePage):
     @allure.step('Получение заголовка модального окна Деталей заказа')
     def get_title_on_ingredient_details(self):
         return self.get_text_from_element(MainPageLocators.INGREDIENT_DETAILS_MODAL_TITLE)
+
+    @allure.step('Поиск Модального окна')
+    def find_modal_window(self):
+        return self.find_element_with_wait(MainPageLocators.MODAL_WINDOW)
+
+    @allure.step('Закрытие модального окна Деталей заказа')
+    def click_to_close_modal_window(self):
+        self.click_to_element(MainPageLocators.CLOSE_MODAL_WINDOW_BUTTON)

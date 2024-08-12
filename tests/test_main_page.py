@@ -45,7 +45,7 @@ class TestMainPage:
         assert order_feed_page.get_title_on_order_feed_page() == 'Лента заказов'
 
     @allure.title('Открытие модального окна "Детали ингредиента"')
-    def test_open_ingredient_details(self, user):
+    def test_open_ingredient_details_modal(self, user):
         extended_driver = user['driver']
         extended_driver.get(LOGIN_PAGE)
 
@@ -57,4 +57,25 @@ class TestMainPage:
         main_page = MainPage(extended_driver)
         main_page.click_to_ingredient()
 
-        assert main_page.get_title_on_ingredient_details() == 'Детали ингредиента'
+        modal_window = main_page.find_modal_window()
+
+        assert (main_page.get_title_on_ingredient_details() == 'Детали ингредиента'
+                and 'opened' in modal_window.get_attribute('class'))
+
+    @allure.title('Закрытие модального окна "Детали ингредиента"')
+    def test_close_ingredient_details_modal(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.click_to_ingredient()
+
+        main_page.click_to_close_modal_window()
+        modal_window = main_page.find_modal_window()
+
+        assert 'opened' not in modal_window.get_attribute('class')
