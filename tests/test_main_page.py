@@ -43,3 +43,18 @@ class TestMainPage:
         order_feed_page = OrderFeedPage(extended_driver)
 
         assert order_feed_page.get_title_on_order_feed_page() == 'Лента заказов'
+
+    @allure.title('Открытие модального окна "Детали ингредиента"')
+    def test_open_ingredient_details(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.click_to_ingredient()
+
+        assert main_page.get_title_on_ingredient_details() == 'Детали ингредиента'
