@@ -28,3 +28,7 @@ class AccountPage(BasePage):
     @allure.step('Клик на элемент Выход')
     def click_to_exit_element(self):
         return self.click_to_element(AccountPageLocators.EXIT_ELEMENT)
+
+    @allure.step('Клик на кнопку Конструктор')
+    def click_to_constructor_button(self):
+        return self.click_to_element(AccountPageLocators.CONSTRUCTOR_BUTTON)

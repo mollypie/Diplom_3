@@ -8,7 +8,7 @@ class LoginPage(BasePage):
 
     @allure.step('Получение заголовка страницы Входа')
     def get_title_on_login_page(self):
-        return self.get_text_from_element(LoginPageLocators.LINK_TITLE)
+        return self.get_text_from_element(LoginPageLocators.LOGIN_TITLE)
 
     @allure.step('Клик по ссылке "Восстановить пароль" на странице авторизации')
     def click_to_forgot_password_link(self):
