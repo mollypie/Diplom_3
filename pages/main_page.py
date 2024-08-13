@@ -44,3 +44,11 @@ class MainPage(BasePage):
     @allure.step('Получение каунтера ингредиента')
     def get_ingredients_counter(self):
         return self.get_text_from_element(MainPageLocators.INGREDIENTS_COUNTER)
+
+    @allure.step('Клик по кнопке «Оформить заказ»')
+    def click_to_order_button(self):
+        self.click_to_element(MainPageLocators.ORDER_BUTTON)
+
+    @allure.step('Получение идентификатора заказа')
+    def get_order_id(self):
+        return self.get_text_from_element(MainPageLocators.ORDER_ID)

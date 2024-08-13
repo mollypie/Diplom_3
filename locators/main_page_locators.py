@@ -17,3 +17,5 @@ class MainPageLocators:
                                      '/div[starts-with(@class, "counter_counter")]'
                                      '/p')  # каунтер ингредиента 'Флюоресцентная булка R2-D3'
     CONSTRUCTOR_SECTION = By.XPATH, './/section[starts-with(@class, "BurgerConstructor_basket")]'  # корзина заказа
+    ORDER_BUTTON = By.XPATH, './/button[text()="Оформить заказ"]'  # кнопка Оформить заказ
+    ORDER_ID = By.XPATH, './/p[starts-with(@class, "undefined text") and text()="идентификатор заказа"]'  # идентификатор заказа

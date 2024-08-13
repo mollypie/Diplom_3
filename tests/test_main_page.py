@@ -94,3 +94,19 @@ class TestMainPage:
         main_page.add_ingredient_to_basket()
 
         assert main_page.get_ingredients_counter() == '2'
+
+    @allure.title('Оформление заказа залогиненным пользователем')
+    def test_create_order(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+
+        assert main_page.get_order_id() == 'идентификатор заказа'
