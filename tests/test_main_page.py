@@ -79,3 +79,18 @@ class TestMainPage:
         modal_window = main_page.find_modal_window()
 
         assert 'opened' not in modal_window.get_attribute('class')
+
+    @allure.title('Подсчёт каунтера добавленного ингредиента')
+    def test_count_ingredient(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.add_ingredient_to_basket()
+
+        assert main_page.get_ingredients_counter() == '2'

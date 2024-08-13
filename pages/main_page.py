@@ -17,6 +17,10 @@ class MainPage(BasePage):
     def click_to_order_feed_button(self):
         self.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
 
+    @allure.step('Получение ингредиента')
+    def get_ingredients(self):
+        return self.get_text_from_element(MainPageLocators.INGREDIENT_BUTTON)
+
     @allure.step('Клик по Ингредиенту')
     def click_to_ingredient(self):
         self.click_to_element(MainPageLocators.INGREDIENT_BUTTON)
@@ -32,3 +36,11 @@ class MainPage(BasePage):
     @allure.step('Закрытие модального окна Деталей заказа')
     def click_to_close_modal_window(self):
         self.click_to_element(MainPageLocators.CLOSE_MODAL_WINDOW_BUTTON)
+
+    @allure.step('Добавление ингредиента в корзину')
+    def add_ingredient_to_basket(self):
+        self.drag_and_drop(MainPageLocators.INGREDIENT_R2_D3_BUN, MainPageLocators.CONSTRUCTOR_SECTION)
+
+    @allure.step('Получение каунтера ингредиента')
+    def get_ingredients_counter(self):
+        return self.get_text_from_element(MainPageLocators.INGREDIENTS_COUNTER)

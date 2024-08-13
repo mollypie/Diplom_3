@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver import ActionChains
 
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -36,3 +37,12 @@ class BasePage:
     def scroll_to_element(self, locator):
         element = self.find_element_with_wait(locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    @allure.step('Drag and Drop')
+    def drag_and_drop(self, draggable_locator, droppable_locator):
+        draggable = self.find_element_with_wait(draggable_locator)
+        start = draggable.location
+        finish = self.find_element_with_wait(droppable_locator).location
+        ActionChains(self.driver) \
+            .drag_and_drop_by_offset(draggable, finish['x'] - start['x'], finish['y'] - start['y']) \
+            .perform()
