@@ -1,6 +1,6 @@
 import allure
 
-from conftest import driver
+from conftest import driver_wrapper
 from data import *
 from helpers import Helpers
 from pages.forgot_password_page import ForgotPasswordPage
@@ -9,7 +9,8 @@ from pages_url import FORGOT_PASSWORD_PAGE
 
 class TestForgotPasswordPage:
     @allure.title('Ввод почты и клик по кнопке «Восстановить»')
-    def test_enter_email_and_click_button(self, driver):
+    def test_enter_email_and_click_button(self, driver_wrapper):
+        driver = Helpers.get_driver(driver_wrapper)
         driver.get(FORGOT_PASSWORD_PAGE)
         forgot_password_page = ForgotPasswordPage(driver)
 

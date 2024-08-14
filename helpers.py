@@ -1,6 +1,11 @@
 import random
 import string
 
+import requests
+
+from pages.login_page import LoginPage
+from pages_url import MAIN_PAGE
+
 
 class Helpers:
     @staticmethod
@@ -31,10 +36,28 @@ class Helpers:
         return email
 
     @staticmethod
-    def credentials_for_login(credentials):
-        credentials_for_login = {
-            'email': credentials['email'],
-            'password': credentials['password']
-        }
+    def create_user(credentials):
+        create_user = requests.post(MAIN_PAGE + '/api/auth/register', data=credentials)
+        assert create_user.status_code == 200
 
-        return credentials_for_login
+        return create_user
+
+    @staticmethod
+    def delete_user(user):
+        requests.delete(MAIN_PAGE + '/api/auth/user', headers={'Authorization': user.json()['accessToken']})
+
+    @staticmethod
+    def get_driver(wrapper):
+        return wrapper[0]
+
+    @staticmethod
+    def get_creds(wrapper):
+        return wrapper[1]
+
+    @staticmethod
+    def login_user(driver, credentials):
+        login_page = LoginPage(driver)
+
+        login_page.enter_email(credentials['email'])
+        login_page.enter_password(credentials['password'])
+        login_page.click_to_button_enter()
