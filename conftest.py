@@ -1,5 +1,9 @@
 import pytest
 import requests
+from selenium import webdriver
+
+# from selenium.webdriver.chrome.options import
+# from selenium.webdriver.firefox.options import Options
 
 from helpers import Helpers
 from pages_url import *
@@ -13,6 +17,18 @@ def driver():
     yield driver
 
     driver.quit()
+
+
+# @pytest.fixture(params=['fireFox', 'chrome'])
+# def driver(request):
+#     if request.param == 'fireFox':
+#         options = Options()
+#         driver = webdriver.Firefox(options=options)
+#     elif request.param == 'chrome':
+#         options = ChromeOptions()
+#         driver = webdriver.Chrome()
+#     yield driver
+#     driver.quit()
 
 
 @pytest.fixture

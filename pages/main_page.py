@@ -32,10 +32,17 @@ class MainPage(BasePage):
 
     @allure.step('Ожидание присвоения идентификатора заказу')
     def wait_order_id(self):
-        self.wait_element(MainPageLocators.ORDER_ID_IN_MODAL)
         WebDriverWait(self.driver, 10).until(
             lambda driver: self.driver.find_element(*MainPageLocators.ORDER_ID_IN_MODAL).text != '9999'
         )
+
+    @allure.step('Получение идентификатора заказа в модальном окне')
+    def get_order_id_in_modal(self):
+        # order_id = self.get_text_from_element(MainPageLocators.ORDER_ID_IN_MODAL)
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: self.driver.find_element(*MainPageLocators.ORDER_ID_IN_MODAL).text != '9999'
+        )
+        return self.get_text_from_element(MainPageLocators.ORDER_ID_IN_MODAL)
 
     @allure.step('Поиск Модального окна')
     def find_modal_window(self):

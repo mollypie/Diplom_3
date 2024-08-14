@@ -7,6 +7,8 @@ class OrderFeedPageLocators:
     COMPOUND_ORDER_TITLE = By.XPATH, ('.//div[starts-with(@class, "Modal_orderBox")]'
                                       '/p[starts-with(@class, "text text_type_main-medium")]')  # заголовок 'Состав' в модальном окне просмотра заказов
     ORDER_ID_IN_ORDER_FEED = By.XPATH, '//p[text()="{}"]'  # ID заказа в Ленте заказов
+    ORDER_ID_IN_WORK = By.XPATH, ('.//ul[starts-with(@class, "OrderFeed_orderListReady")]'
+                                  '/li[contains(normalize-space(.), "{}")]')  # заказы "В работе"
     COUNT_ORDER_ALL = By.XPATH, ('.//p[text()="Выполнено за все время:"]'
                                  '/parent::div'
                                  '/p[starts-with(@class, "OrderFeed_number")]')  # количество заказов за всё время

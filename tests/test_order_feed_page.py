@@ -106,4 +106,25 @@ class TestOrderFeedPage:
         main_page.click_to_order_feed_button()
 
         assert order_feed_page.get_today_orders_count() > old_count
-        
+
+    @allure.title('Заказ пользователя появляется в разделе "В работе"')
+    def test_order_in_work(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+        main_page.wait_order_id()
+        order_id = main_page.get_order_id_in_modal()
+        main_page.click_to_close_modal_window()
+        main_page.click_to_order_feed_button()
+
+        order_feed_page = OrderFeedPage(extended_driver)
+
+        assert order_feed_page.get_order_id_in_work(order_id) == f'0{order_id}'
