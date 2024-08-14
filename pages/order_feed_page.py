@@ -26,3 +26,15 @@ class OrderFeedPage(BasePage):
         new_answer_locator = self.format_locators(OrderFeedPageLocators.ORDER_ID_IN_ORDER_FEED, order_id)
         self.scroll_to_element(new_answer_locator)
         return self.get_text_from_element(new_answer_locator)
+
+    @allure.step('Получение количества заказов за всё время')
+    def get_all_orders_count(self):
+        return self.get_text_from_element(OrderFeedPageLocators.COUNT_ORDER_ALL)
+
+    @allure.step('Получение количества заказов за сегодня')
+    def get_today_orders_count(self):
+        return self.get_text_from_element(OrderFeedPageLocators.COUNT_ORDER_TODAY)
+
+    @allure.step('Клик на кнопку Конструктор')
+    def click_to_constructor_button(self):
+        return self.click_to_element(OrderFeedPageLocators.CONSTRUCTOR_BUTTON)

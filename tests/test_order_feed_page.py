@@ -56,3 +56,54 @@ class TestOrderFeedPage:
         order_feed_page = OrderFeedPage(extended_driver)
 
         assert order_feed_page.get_order_id_in_order_feed_page(order_id) == order_id
+
+    @allure.title('Увеличение счётчика "Выполнено за всё время" при создании нового заказа')
+    def test_increase_counter_all_time(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.click_to_order_feed_button()
+
+        order_feed_page = OrderFeedPage(extended_driver)
+        old_count = order_feed_page.get_all_orders_count()
+        order_feed_page.click_to_constructor_button()
+
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+        main_page.wait_order_id()
+        main_page.click_to_close_modal_window()
+        main_page.click_to_order_feed_button()
+
+        assert order_feed_page.get_all_orders_count() > old_count
+
+    @allure.title('Увеличение счётчика "Выполнено за сегодня" при создании нового заказа')
+    def test_increase_counter_all_time(self, user):
+        extended_driver = user['driver']
+        extended_driver.get(LOGIN_PAGE)
+
+        login_page = LoginPage(extended_driver)
+        login_page.enter_email(user['credentials']['email'])
+        login_page.enter_password(user['credentials']['password'])
+        login_page.click_to_button_enter()
+
+        main_page = MainPage(extended_driver)
+        main_page.click_to_order_feed_button()
+
+        order_feed_page = OrderFeedPage(extended_driver)
+        old_count = order_feed_page.get_today_orders_count()
+        order_feed_page.click_to_constructor_button()
+
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+        main_page.wait_order_id()
+        main_page.click_to_close_modal_window()
+        main_page.click_to_order_feed_button()
+
+        assert order_feed_page.get_today_orders_count() > old_count
+        
