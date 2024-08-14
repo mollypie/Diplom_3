@@ -20,3 +20,4 @@ class MainPageLocators:
     CONSTRUCTOR_SECTION = By.XPATH, './/section[starts-with(@class, "BurgerConstructor_basket")]'  # корзина заказа
     ORDER_BUTTON = By.XPATH, './/button[text()="Оформить заказ"]'  # кнопка Оформить заказ
     ORDER_ID_TITLE = By.XPATH, './/p[starts-with(@class, "undefined text") and text()="идентификатор заказа"]'  # заголовок Идентификатор заказа
+    MODAL_WINDOW_OVERLAY = By.XPATH, './/*[contains(@class, "Modal_modal__loading")]/following::div[@class="Modal_modal_overlay__x2ZCr"]'

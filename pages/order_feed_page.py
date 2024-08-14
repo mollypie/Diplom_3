@@ -11,11 +11,11 @@ class OrderFeedPage(BasePage):
 
     @allure.step('Клик на кнопку Конструктор')
     def click_to_constructor_button(self):
-        return self.click_to_element(OrderFeedPageLocators.CONSTRUCTOR_BUTTON)
+        self.click_to_element(OrderFeedPageLocators.CONSTRUCTOR_BUTTON)
 
     @allure.step('Открытие детального просмотра заказа')
     def get_order_details_modal(self):
-        return self.click_to_element(OrderFeedPageLocators.ORDER_ITEM)
+        self.click_to_element(OrderFeedPageLocators.ORDER_ITEM)
 
     @allure.step('Получение заголовка Состав в модальном окне детального просмотра заказов')
     def get_title_on_order_details_modal(self):

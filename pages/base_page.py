@@ -1,8 +1,12 @@
+import time
+
 import allure
 from selenium.webdriver import ActionChains
 
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+
+from data import MODAL_WINDOW_OVERLAY
 
 
 class BasePage:
@@ -11,11 +15,12 @@ class BasePage:
 
     @allure.step('Ожидание появления элемента на странице')
     def wait_element(self, locator):
-        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
 
     @allure.step('Ожидание кликабельности элемента на странице')
     def wait_clickable_element(self, locator):
-        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
+        WebDriverWait(self.driver, 10).until_not(expected_conditions.visibility_of_element_located(MODAL_WINDOW_OVERLAY))
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator))
 
     @allure.step('Ожидание появления элемента на странице с условием неравенства')
     def wait_element_with_non_condition(self, locator, condition):

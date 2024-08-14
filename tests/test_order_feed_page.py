@@ -26,7 +26,7 @@ class TestOrderFeedPage:
 
         assert order_feed_page.get_title_on_order_details_modal() == ORDER_DETAILS_MODAL_TITLE
 
-    @allure.title('Заказ пользователя из раздела История заказов отображается на странице Лента заказов')
+    @allure.title('Отображение заказа пользователя из раздела История заказов на странице Лента заказов')
     def test_order_in_order_feed(self, driver_wrapper):
         driver = Helpers.get_driver(driver_wrapper)
         driver.get(LOGIN_PAGE)
@@ -87,7 +87,7 @@ class TestOrderFeedPage:
 
         assert order_feed_page.get_today_orders_count() > old_count
 
-    @allure.title('Заказ пользователя появляется в разделе В работе')
+    @allure.title('Отображение заказа пользователя в разделе В работе')
     def test_order_in_work(self, driver_wrapper):
         driver = Helpers.get_driver(driver_wrapper)
         driver.get(LOGIN_PAGE)
