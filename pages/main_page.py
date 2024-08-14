@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver.support.wait import WebDriverWait
 
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
@@ -28,6 +29,13 @@ class MainPage(BasePage):
     @allure.step('Получение заголовка модального окна Деталей заказа')
     def get_title_on_ingredient_details(self):
         return self.get_text_from_element(MainPageLocators.INGREDIENT_DETAILS_MODAL_TITLE)
+
+    @allure.step('Ожидание присвоения идентификатора заказу')
+    def wait_order_id(self):
+        self.wait_element(MainPageLocators.ORDER_ID_IN_MODAL)
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: self.driver.find_element(*MainPageLocators.ORDER_ID_IN_MODAL).text != '9999'
+        )
 
     @allure.step('Поиск Модального окна')
     def find_modal_window(self):

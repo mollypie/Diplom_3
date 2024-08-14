@@ -8,6 +8,7 @@ class MainPageLocators:
     INGREDIENT_BUTTON = By.XPATH, './/a[starts-with(@class, "BurgerIngredient")]'  # ингредиент
     INGREDIENT_DETAILS_MODAL_TITLE = By.XPATH, './/h2[text()="Детали ингредиента"]'  # заголовок модального окна Деталей заказа
     MODAL_WINDOW = By.XPATH, './/section[starts-with(@class, "Modal_modal")]'  # модальное окно Деталей заказа
+    ORDER_ID_IN_MODAL = By.XPATH, './/div[starts-with(@class, "Modal_modal__contentBox")]/h2'  # идентификатор заказа в модальном окне
     CLOSE_MODAL_WINDOW_BUTTON = By.XPATH, ('.//section[starts-with(@class, "Modal_modal_opened")]'
                                            '/div[starts-with(@class, "Modal_modal__container")]'
                                            '/button[@type="button"]')  # кнопка закрытия модального окна Деталей заказа

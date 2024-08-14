@@ -33,6 +33,13 @@ class BasePage:
     def get_text_from_element(self, locator):
         return self.find_element_with_wait(locator).text
 
+    @allure.step('Добавление значения локатору')
+    def format_locators(self, locator, value):
+        method, locator_new = locator
+        locator_new = locator_new.format(value)
+
+        return (method, locator_new)
+
     @allure.step('Скролл')
     def scroll_to_element(self, locator):
         element = self.find_element_with_wait(locator)
