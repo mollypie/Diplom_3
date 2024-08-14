@@ -4,6 +4,7 @@ import string
 import requests
 
 from pages.login_page import LoginPage
+from pages.main_page import MainPage
 from pages_url import MAIN_PAGE
 
 
@@ -61,3 +62,20 @@ class Helpers:
         login_page.enter_email(credentials['email'])
         login_page.enter_password(credentials['password'])
         login_page.click_to_button_enter()
+
+    @staticmethod
+    def create_order(main_page):
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+        main_page.wait_order_id_in_modal()
+        main_page.click_to_close_modal_window()
+
+    @staticmethod
+    def create_order_and_return_order_id(main_page):
+        main_page.add_ingredient_to_basket()
+        main_page.click_to_order_button()
+        main_page.wait_order_id_in_modal()
+        order_id = main_page.get_order_id_in_modal()
+        main_page.click_to_close_modal_window()
+
+        return order_id

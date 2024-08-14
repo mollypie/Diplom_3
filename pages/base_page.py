@@ -13,6 +13,10 @@ class BasePage:
     def wait_element(self, locator):
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
 
+    @allure.step('Ожидание кликабельности элемента на странице')
+    def wait_clickable_element(self, locator):
+        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
+
     @allure.step('Ожидание появления элемента на странице с условием неравенства')
     def wait_element_with_non_condition(self, locator, condition):
         WebDriverWait(self.driver, 10).until(
@@ -36,7 +40,7 @@ class BasePage:
 
     @allure.step('Клик на элемент')
     def click_to_element(self, locator):
-        self.wait_element(locator)
+        self.wait_clickable_element(locator)
         self.driver.find_element(*locator).click()
 
     @allure.step('Ввод текста')

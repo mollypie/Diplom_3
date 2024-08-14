@@ -7,7 +7,7 @@ from pages.base_page import BasePage
 class ForgotPasswordPage(BasePage):
 
     @allure.step('Получение заголовка страницы восстановления пароля')
-    def get_title_on_login_page(self):
+    def get_title_on_forgot_password_page(self):
         return self.get_text_from_element(ForgotPasswordPageLocators.FORGOT_PASSWORD_TITLE)
 
     @allure.step('Ввод почты в поле')

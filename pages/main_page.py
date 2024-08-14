@@ -17,10 +17,6 @@ class MainPage(BasePage):
     def click_to_order_feed_button(self):
         self.click_to_element(MainPageLocators.ORDER_FEED_BUTTON)
 
-    # @allure.step('Получение ингредиента')
-    # def get_ingredients(self):
-    #     return self.get_text_from_element(MainPageLocators.INGREDIENT_BUTTON)
-
     @allure.step('Клик по ингредиенту')
     def click_to_ingredient(self):
         self.click_to_element(MainPageLocators.INGREDIENT_BUTTON)
@@ -30,7 +26,7 @@ class MainPage(BasePage):
         return self.find_element_with_wait(MainPageLocators.MODAL_WINDOW)
 
     @allure.step('Получение заголовка модального окна Деталей заказа')
-    def get_title_on_ingredient_details(self):
+    def get_title_on_ingredient_details_modal(self):
         return self.get_text_from_element(MainPageLocators.INGREDIENT_DETAILS_MODAL_TITLE)
 
     @allure.step('Закрытие модального окна Деталей заказа')
@@ -50,15 +46,14 @@ class MainPage(BasePage):
         self.click_to_element(MainPageLocators.ORDER_BUTTON)
 
     @allure.step('Получение заголовка Идентификатор заказа в модальном окне Заказа')
-    def get_title_order_id(self):
+    def get_title_order_id_in_modal(self):
         return self.get_text_from_element(MainPageLocators.ORDER_ID_TITLE)
 
     @allure.step('Ожидание присвоения идентификатора заказу в модальном окне Заказа')
-    def wait_order_id(self):
+    def wait_order_id_in_modal(self):
         self.wait_element_with_non_condition(MainPageLocators.ORDER_ID_IN_MODAL, '9999')
 
     @allure.step('Получение идентификатора заказа в модальном окне Заказа')
     def get_order_id_in_modal(self):
         self.wait_element_with_non_condition(MainPageLocators.ORDER_ID_IN_MODAL, '9999')
         return self.get_text_from_element(MainPageLocators.ORDER_ID_IN_MODAL)
-

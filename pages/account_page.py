@@ -32,3 +32,7 @@ class AccountPage(BasePage):
     @allure.step('Клик на кнопку Конструктор')
     def click_to_constructor_button(self):
         return self.click_to_element(AccountPageLocators.CONSTRUCTOR_BUTTON)
+
+    @allure.step('Клик на кнопку Лента Заказов')
+    def click_to_order_feed_button(self):
+        return self.click_to_element(AccountPageLocators.ORDER_FEED_BUTTON)

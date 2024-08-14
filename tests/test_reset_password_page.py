@@ -19,6 +19,4 @@ class TestResetPasswordPage:
         reset_password_page = ResetPasswordPage(driver)
         reset_password_page.click_recover_and_hide_button()
 
-        password_input = reset_password_page.find_password_input()
-
-        assert password_input.get_attribute('type') == 'text'
+        assert reset_password_page.find_password_input().get_attribute('type') == 'text'
