@@ -11,6 +11,10 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step('Открытие страницы')
+    def open_page(self, page):
+        self.driver.get(page)
+
     @allure.step('Ожидание появления элемента на странице')
     def wait_element(self, locator):
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
