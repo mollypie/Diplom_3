@@ -5,7 +5,7 @@ from helpers import Helpers
 from pages_url import LOGIN_PAGE
 
 
-@pytest.fixture(params=['chrome'])  # , 'firefox'
+@pytest.fixture(params=['chrome', 'firefox'])
 def driver(request):
     if request.param == 'chrome':
         chrome_options = webdriver.ChromeOptions()
