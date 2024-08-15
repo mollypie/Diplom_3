@@ -25,3 +25,9 @@ class LoginPage(BasePage):
     @allure.step('Клик на кнопку Войти')
     def click_to_button_enter(self):
         self.click_to_element(LoginPageLocators.BUTTON_ENTER)
+
+    @allure.step('Авторизация пользователя')
+    def login_user(self, user):
+        self.enter_email(user['email'])
+        self.enter_password(user['password'])
+        self.click_to_button_enter()

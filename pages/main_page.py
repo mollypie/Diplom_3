@@ -57,3 +57,13 @@ class MainPage(BasePage):
     def get_order_id_in_modal(self):
         self.wait_element_with_non_condition(MainPageLocators.ORDER_ID_IN_MODAL, '9999')
         return self.get_text_from_element(MainPageLocators.ORDER_ID_IN_MODAL)
+
+    @allure.step('Создание заказа')
+    def create_order(self):
+        self.add_ingredient_to_basket()
+        self.click_to_order_button()
+        self.wait_order_id_in_modal()
+        order_id = self.get_order_id_in_modal()
+        self.click_to_close_modal_window()
+
+        return order_id

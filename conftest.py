@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 
 from helpers import Helpers
+from pages_url import LOGIN_PAGE
 
 
 @pytest.fixture(params=['chrome'])  # , 'firefox'
@@ -17,6 +18,8 @@ def driver(request):
         driver = webdriver.Firefox(options=firefox_options)
     else:
         raise Exception("Invalid driver param")
+
+    driver.get(LOGIN_PAGE)
 
     yield driver
 

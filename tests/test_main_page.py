@@ -2,19 +2,17 @@ import allure
 
 from conftest import *
 from data import *
-from helpers import Helpers
 from pages.account_page import AccountPage
+from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
-from pages_url import LOGIN_PAGE
 
 
 class TestMainPage:
     @allure.title('Переход по клику на Личный кабинет')
     def test_open_account_page(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()
@@ -26,9 +24,8 @@ class TestMainPage:
 
     @allure.title('Переход по клику в Лента Заказов')
     def test_open_order_feed_page(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_order_feed_button()
@@ -39,9 +36,8 @@ class TestMainPage:
 
     @allure.title('Открытие модального окна Детали ингредиента')
     def test_open_ingredient_details_modal(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_ingredient()
@@ -51,9 +47,8 @@ class TestMainPage:
 
     @allure.title('Закрытие модального окна Детали ингредиента')
     def test_close_ingredient_details_modal(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_ingredient()
@@ -64,9 +59,8 @@ class TestMainPage:
 
     @allure.title('Подсчёт добавленного ингредиента')
     def test_count_ingredient(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.add_ingredient_to_basket()
@@ -75,9 +69,8 @@ class TestMainPage:
 
     @allure.title('Оформление заказа залогиненным пользователем')
     def test_create_order(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.add_ingredient_to_basket()

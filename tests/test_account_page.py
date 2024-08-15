@@ -2,19 +2,16 @@ import allure
 
 from conftest import *
 from data import *
-from helpers import Helpers
 from pages.account_page import AccountPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
-from pages_url import *
 
 
 class TestAccountPage:
     @allure.title('Переход в раздел История заказов')
     def test_open_order_history_page(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()
@@ -27,9 +24,8 @@ class TestAccountPage:
 
     @allure.title('Выход из аккаунта')
     def test_logout(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()
@@ -37,15 +33,12 @@ class TestAccountPage:
         account_page = AccountPage(driver)
         account_page.click_to_exit_element()
 
-        login_page = LoginPage(driver)
-
         assert login_page.get_title_on_login_page() == LOGIN_PAGE_TITLE
 
     @allure.title('Переход по клику на Конструктор')
     def test_open_main_page(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()

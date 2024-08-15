@@ -2,20 +2,18 @@ import allure
 
 from conftest import *
 from data import *
-from helpers import Helpers
 from pages.account_page import AccountPage
+from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
 from pages.order_history_page import OrderHistoryPage
-from pages_url import LOGIN_PAGE
 
 
 class TestOrderFeedPage:
     @allure.title('Получение всплывающего окна с деталями заказа')
     def test_open_order_details_modal(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_order_feed_button()
@@ -27,12 +25,11 @@ class TestOrderFeedPage:
 
     @allure.title('Отображение заказа пользователя из раздела История заказов на странице Лента заказов')
     def test_order_in_order_feed(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
-        Helpers.create_order(main_page)
+        main_page.create_order()
         main_page.click_to_account_button()
 
         account_page = AccountPage(driver)
@@ -49,9 +46,8 @@ class TestOrderFeedPage:
 
     @allure.title('Увеличение счётчика Выполнено за всё время при создании нового заказа')
     def test_increase_counter_all_time(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_order_feed_button()
@@ -60,16 +56,15 @@ class TestOrderFeedPage:
         old_count = order_feed_page.get_all_orders_count()
         order_feed_page.click_to_constructor_button()
 
-        Helpers.create_order(main_page)
+        main_page.create_order()
         main_page.click_to_order_feed_button()
 
         assert order_feed_page.get_all_orders_count() > old_count
 
     @allure.title('Увеличение счётчика Выполнено за сегодня при создании нового заказа')
     def test_increase_counter_today(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
         main_page.click_to_order_feed_button()
@@ -78,20 +73,19 @@ class TestOrderFeedPage:
         old_count = order_feed_page.get_today_orders_count()
         order_feed_page.click_to_constructor_button()
 
-        Helpers.create_order(main_page)
+        main_page.create_order()
         main_page.click_to_order_feed_button()
 
         assert order_feed_page.get_today_orders_count() > old_count
 
     @allure.title('Отображение заказа пользователя в разделе В работе')
     def test_order_in_work(self, driver, user):
-        driver.get(LOGIN_PAGE)
-
-        Helpers.login_user(driver, user)
+        login_page = LoginPage(driver)
+        login_page.login_user(user)
 
         main_page = MainPage(driver)
 
-        order_id = Helpers.create_order_and_return_order_id(main_page)
+        order_id = main_page.create_order()
 
         main_page.click_to_order_feed_button()
 

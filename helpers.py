@@ -3,7 +3,6 @@ import string
 
 import requests
 
-from pages.login_page import LoginPage
 from pages_url import MAIN_PAGE
 
 
@@ -45,27 +44,3 @@ class Helpers:
     @staticmethod
     def delete_user(user):
         requests.delete(MAIN_PAGE + '/api/auth/user', headers={'Authorization': user.json()['accessToken']})
-
-    @staticmethod
-    def login_user(driver, user):
-        login_page = LoginPage(driver)
-        login_page.enter_email(user['email'])
-        login_page.enter_password(user['password'])
-        login_page.click_to_button_enter()
-
-    @staticmethod
-    def create_order(main_page):
-        main_page.add_ingredient_to_basket()
-        main_page.click_to_order_button()
-        main_page.wait_order_id_in_modal()
-        main_page.click_to_close_modal_window()
-
-    @staticmethod
-    def create_order_and_return_order_id(main_page):
-        main_page.add_ingredient_to_basket()
-        main_page.click_to_order_button()
-        main_page.wait_order_id_in_modal()
-        order_id = main_page.get_order_id_in_modal()
-        main_page.click_to_close_modal_window()
-
-        return order_id
