@@ -1,6 +1,6 @@
 import allure
 
-from conftest import driver_wrapper
+from conftest import *
 from data import *
 from helpers import Helpers
 from pages.account_page import AccountPage
@@ -11,11 +11,10 @@ from pages_url import *
 
 class TestAccountPage:
     @allure.title('Переход в раздел История заказов')
-    def test_open_order_history_page(self, driver_wrapper):
-        driver = Helpers.get_driver(driver_wrapper)
+    def test_open_order_history_page(self, driver, user):
         driver.get(LOGIN_PAGE)
 
-        Helpers.login_user(*driver_wrapper)
+        Helpers.login_user(driver, user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()
@@ -27,11 +26,10 @@ class TestAccountPage:
                 and account_page.get_order_history_element().get_attribute('aria-current') == 'page')
 
     @allure.title('Выход из аккаунта')
-    def test_logout(self, driver_wrapper):
-        driver = Helpers.get_driver(driver_wrapper)
+    def test_logout(self, driver, user):
         driver.get(LOGIN_PAGE)
 
-        Helpers.login_user(*driver_wrapper)
+        Helpers.login_user(driver, user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()
@@ -44,11 +42,10 @@ class TestAccountPage:
         assert login_page.get_title_on_login_page() == LOGIN_PAGE_TITLE
 
     @allure.title('Переход по клику на Конструктор')
-    def test_open_main_page(self, driver_wrapper):
-        driver = Helpers.get_driver(driver_wrapper)
+    def test_open_main_page(self, driver, user):
         driver.get(LOGIN_PAGE)
 
-        Helpers.login_user(*driver_wrapper)
+        Helpers.login_user(driver, user)
 
         main_page = MainPage(driver)
         main_page.click_to_account_button()

@@ -1,8 +1,7 @@
 import allure
 
-from conftest import driver_wrapper
+from conftest import driver
 from data import *
-from helpers import Helpers
 from pages.forgot_password_page import ForgotPasswordPage
 from pages.login_page import LoginPage
 from pages_url import LOGIN_PAGE
@@ -10,8 +9,7 @@ from pages_url import LOGIN_PAGE
 
 class TestLoginPage:
     @allure.title('Переход на страницу восстановления пароля по кнопке Восстановить пароль')
-    def test_open_forgot_password_page(self, driver_wrapper):
-        driver = Helpers.get_driver(driver_wrapper)
+    def test_open_forgot_password_page(self, driver):
         driver.get(LOGIN_PAGE)
 
         login_page = LoginPage(driver)

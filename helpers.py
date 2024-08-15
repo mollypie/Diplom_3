@@ -47,19 +47,10 @@ class Helpers:
         requests.delete(MAIN_PAGE + '/api/auth/user', headers={'Authorization': user.json()['accessToken']})
 
     @staticmethod
-    def get_driver(wrapper):
-        return wrapper[0]
-
-    @staticmethod
-    def get_creds(wrapper):
-        return wrapper[1]
-
-    @staticmethod
-    def login_user(driver, credentials):
+    def login_user(driver, user):
         login_page = LoginPage(driver)
-
-        login_page.enter_email(credentials['email'])
-        login_page.enter_password(credentials['password'])
+        login_page.enter_email(user['email'])
+        login_page.enter_password(user['password'])
         login_page.click_to_button_enter()
 
     @staticmethod

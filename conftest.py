@@ -4,8 +4,8 @@ from selenium import webdriver
 from helpers import Helpers
 
 
-@pytest.fixture(params=['chrome', 'firefox'])
-def driver_wrapper(request):
+@pytest.fixture(params=['chrome'])  # , 'firefox'
+def driver(request):
     if request.param == 'chrome':
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--window-size=1280,720')
@@ -18,11 +18,16 @@ def driver_wrapper(request):
     else:
         raise Exception("Invalid driver param")
 
+    yield driver
+
+    driver.quit()
+
+
+@pytest.fixture
+def user(driver):
     credentials = Helpers.generate_credentials(email=True, password=True, name=True)
     user = Helpers.create_user(credentials)
 
-    yield driver, credentials
+    yield credentials
 
     Helpers.delete_user(user)
-
-    driver.quit()

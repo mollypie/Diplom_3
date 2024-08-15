@@ -1,7 +1,6 @@
 import allure
 
-from conftest import driver_wrapper
-from helpers import Helpers
+from conftest import driver
 from pages.forgot_password_page import ForgotPasswordPage
 from pages.reset_password_page import ResetPasswordPage
 from pages_url import FORGOT_PASSWORD_PAGE
@@ -9,8 +8,7 @@ from pages_url import FORGOT_PASSWORD_PAGE
 
 class TestResetPasswordPage:
     @allure.title('Активация поля нового пароля кликом по кнопке показать/скрыть пароль')
-    def test_click_to_show_password(self, driver_wrapper):
-        driver = Helpers.get_driver(driver_wrapper)
+    def test_click_to_show_password(self, driver):
         driver.get(FORGOT_PASSWORD_PAGE)
 
         forgot_password_page = ForgotPasswordPage(driver)
